@@ -9,8 +9,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
         "dark-navy": "#313E51",
         "grey-navy": "#626C7F",
         "light-bluish": "#ABC1E1",
@@ -19,7 +17,7 @@ export default {
         navy: "#3B4D66",
         purple: "#A729F5",
         red: "#EE5454",
-        white: "#FFFFFF",
+        white: "#FFFFFF"
       },
     },
   },
