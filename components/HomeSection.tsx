@@ -7,7 +7,7 @@ import accessibilityIcon from "@/public/icon-accessibility.svg"
 
 export default function HomeSection() {
   return (
-    <div className="grid grid-cols-2 gap-x-32">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32">
       <div>
         <h1 className="text-5xl font-light text-dark-navy">
           Welcome to the <span className="font-bold">Frontend Quiz!</span>

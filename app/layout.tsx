@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="py-10 px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-desktop-light.svg')]">
+      <body className="py-10 px-8 md:px-20 lg:px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-desktop-light.svg')]">
         <Header />
         {children}
       </body>
