@@ -1,13 +1,13 @@
 import Image from "next/image"
-import htmlIcon from "../public/icon-html.svg"
-import cssIcon from "../public/icon-css.svg"
-import jsIcon from "../public/icon-js.svg"
-import accessibilityIcon from "../public/icon-accessibility.svg"
+import htmlIcon from "@/public/icon-html.svg"
+import cssIcon from "@/public/icon-css.svg"
+import jsIcon from "@/public/icon-js.svg"
+import accessibilityIcon from "@/public/icon-accessibility.svg"
 
 
 export default function HomeSection() {
   return (
-    <div className="grid grid-cols-2 gap-x-32 py-28 px-36">
+    <div className="grid grid-cols-2 gap-x-32">
       <div>
         <h1 className="text-5xl font-light text-dark-navy">
           Welcome to the <span className="font-bold">Frontend Quiz!</span>
