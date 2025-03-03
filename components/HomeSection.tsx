@@ -5,7 +5,7 @@ import jsIcon from "../public/icon-js.svg"
 import accessibilityIcon from "../public/icon-accessibility.svg"
 
 
-export default function Home() {
+export default function HomeSection() {
   return (
     <div className="grid grid-cols-2 gap-x-32 py-28 px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-desktop-light.svg')]">
       <div>
