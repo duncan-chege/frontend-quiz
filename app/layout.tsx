@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-cover bg-center min-h-screen bg-[url('/pattern-background-desktop-light.svg')]">
         <Header />
         {children}
       </body>
