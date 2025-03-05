@@ -21,7 +21,7 @@ export default function Header() {
         "/accessibility": {title: "", icon:""}
     }
 
-    // Set the heading based on the pathname, default to ""
+    // Set the heading based on the pathname, default to "". Destructuring the pageData object
     const { title, icon } = pageData[pathname] || {title: "", icon: ""}
 
   return (

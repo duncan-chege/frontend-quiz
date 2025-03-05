@@ -2,7 +2,7 @@ import SubmitButton from "@/components/SubmitButton";
 
 export default function AccessibilityPage() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32" role="main">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32 gap-y-8" role="main">
       <div>
         <p className="italic text-grey-navy">Question 6 out of 10</p>
         <h3 className="mt-8 font-bold text-3xl text-dark-navy">
