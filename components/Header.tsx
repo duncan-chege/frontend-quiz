@@ -28,7 +28,7 @@ export default function Header() {
     <header className="flex justify-between pb-20">
         <div className="flex items-center gap-x-4">
             <Image className="p-2 bg-fuchsia-100 rounded-md" src={icon} alt={`${title} icon`} />
-            <h1 className="text-2xl font-semibold text-dark-navy">{title}</h1>
+            <h1 className="text-xl md:text-2xl font-semibold text-dark-navy">{title}</h1>
         </div>
       <div className="flex items-center gap-x-2">
         <Image src={sunIcon} alt="the sun icon" />

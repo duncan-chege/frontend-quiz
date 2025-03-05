@@ -5,7 +5,7 @@ export default function AccessibilityPage() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32 gap-y-8" role="main">
       <div>
         <p className="italic text-grey-navy">Question 6 out of 10</p>
-        <h3 className="mt-8 font-bold text-3xl text-dark-navy">
+        <h3 className="mt-8 font-bold text-2xl md:text-3xl text-dark-navy">
           Which of these color contrast ratios defines the minimum WCAG 2.1
           Level AA requirement for normal text?
         </h3>
