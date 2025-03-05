@@ -3,7 +3,7 @@ import htmlIcon from "@/public/icon-html.svg"
 import cssIcon from "@/public/icon-css.svg"
 import jsIcon from "@/public/icon-js.svg"
 import accessibilityIcon from "@/public/icon-accessibility.svg"
-
+import Link from "next/link"
 
 export default function HomeSection() {
   return (
@@ -27,10 +27,13 @@ export default function HomeSection() {
           <Image src={jsIcon} alt="js icon" className="p-2 bg-blue-100 rounded-md" />
           <h2 className="text-2xl font-semibold text-dark-navy">Javascript</h2>
         </div>
+
+        <Link href="/accessibility">
         <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
           <Image src={accessibilityIcon} alt="accessibility icon" className="p-2 bg-violet-200 rounded-md" />
           <h2 className="text-2xl font-semibold text-dark-navy">Accessibility</h2>
         </div>
+        </Link>
       </div>
     </div>
   );
