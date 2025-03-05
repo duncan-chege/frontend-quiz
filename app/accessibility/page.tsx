@@ -1,3 +1,5 @@
+import SubmitButton from "@/components/SubmitButton";
+
 export default function AccessibilityPage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32" role="main">
@@ -25,7 +27,7 @@ export default function AccessibilityPage() {
           <p className="py-2 px-4 bg-light-grey rounded-md text-2xl font-bold text-grey-navy">D</p>
           <h2 className="text-2xl font-semibold text-dark-navy">5:1</h2>
         </div>
-        <button className="hover:bg-fuchsia-400 bg-purple cursor-pointer p-4 rounded-xl text-white text-lg"> Submit Answer </button>
+        <SubmitButton />
       </div>
     </div>
   );
