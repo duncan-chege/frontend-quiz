@@ -9,8 +9,8 @@ export default function AccessibilityPage() {
         </h3>
       </div>
       <div className="flex flex-col gap-y-6">
-        <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
-          <p className="py-2 px-4 bg-light-grey rounded-md text-2xl font-bold text-grey-navy">A</p>
+        <div className="group active:outline active:outline-[3px] active:outline-purple cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
+          <p className="group-active:bg-purple group-active:text-white group-hover:bg-fuchsia-100 group-hover:text-purple py-2 px-4 bg-light-grey rounded-md text-2xl font-bold text-grey-navy">A</p>
           <h2 className="text-2xl font-semibold text-dark-navy">4.5:1</h2>
         </div>
         <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
@@ -25,7 +25,7 @@ export default function AccessibilityPage() {
           <p className="py-2 px-4 bg-light-grey rounded-md text-2xl font-bold text-grey-navy">D</p>
           <h2 className="text-2xl font-semibold text-dark-navy">5:1</h2>
         </div>
-        <button className="bg-purple cursor-pointer p-4 rounded-xl text-white text-lg"> Submit Answer </button>
+        <button className="hover:bg-fuchsia-400 bg-purple cursor-pointer p-4 rounded-xl text-white text-lg"> Submit Answer </button>
       </div>
     </div>
   );
