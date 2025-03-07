@@ -3,6 +3,7 @@
 import SubmitButton from "@/components/SubmitButton";
 import quizData from "@/app/data/data.json";
 import { useState } from "react";
+import ProgressBar from "@/components/ProgressBar";
 
 export default function AccessibilityPage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -24,6 +25,7 @@ export default function AccessibilityPage() {
         <h3 className="mt-8 font-bold text-2xl md:text-3xl text-dark-navy">
           {currentQuestion.question}
         </h3>
+        <ProgressBar currentIndex={currentIndex} totalQuestions={questions.length} />
       </div>
       <div className="flex flex-col gap-y-6">
         {currentQuestion.options.map((option, index) => (
