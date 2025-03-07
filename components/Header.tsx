@@ -16,18 +16,13 @@ export default function Header() {
         "/accessibility": {title: "Accessibility", icon: accessibilityIcon },
     }
 
-    const pagexData = {
-        "/": {title: "", icon:""},
-        "/accessibility": {title: "", icon:""}
-    }
-
     // Set the heading based on the pathname, default to "". Destructuring the pageData object
     const { title, icon } = pageData[pathname] || {title: "", icon: ""}
 
   return (
     <header className="flex justify-between pb-20">
         <div className="flex items-center gap-x-4">
-            <Image className="p-2 bg-fuchsia-100 rounded-md" src={icon} alt={`${title} icon`} />
+            {icon && <Image className="p-2 bg-fuchsia-100 rounded-md" src={icon} alt={`${title} icon`} />}
             <h1 className="text-xl md:text-2xl font-semibold text-dark-navy">{title}</h1>
         </div>
       <div className="flex items-center gap-x-2">
