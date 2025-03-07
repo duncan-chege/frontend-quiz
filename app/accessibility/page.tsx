@@ -29,7 +29,7 @@ export default function AccessibilityPage() {
         {currentQuestion.options.map((option, index) => (
           <li
             key={index}
-            className={`cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl
+            className={`group cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl
               ${
                 selectedOption === index
                   ? "outline outline-[3px] outline-purple"
@@ -37,7 +37,7 @@ export default function AccessibilityPage() {
               }`}
             onClick={() => setSelectedOption(index)}>
             <span
-              className={`bg-light-grey text-grey-navy py-2 px-4 rounded-md text-2xl font-bold ${
+              className={`group-hover:bg-fuchsia-100 group-hover:text-purple bg-light-grey text-grey-navy py-2 px-4 rounded-md text-2xl font-bold ${
                 selectedOption === index ? "bg-purple text-white" : ""
               }`}>
               {optionLabels[index]}
