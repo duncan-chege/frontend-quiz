@@ -1,5 +1,5 @@
 import SubmitButton from "@/components/SubmitButton";
-import data from "@/app/data/data.json";
+import quizData from "@/app/data/data.json";
 
 export default function AccessibilityPage() {
   return (
