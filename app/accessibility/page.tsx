@@ -20,7 +20,7 @@ export default function AccessibilityPage() {
       className="grid grid-cols-1 lg:grid-cols-2 gap-x-32 gap-y-8"
       role="main">
       <div>
-        <p className="italic text-grey-navy">Question 6 out of 10</p>
+        <p className="italic text-grey-navy">Question {currentIndex + 1} out of {questions.length}</p>
         <h3 className="mt-8 font-bold text-2xl md:text-3xl text-dark-navy">
           {currentQuestion.question}
         </h3>
