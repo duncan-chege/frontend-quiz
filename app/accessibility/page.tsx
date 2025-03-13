@@ -34,7 +34,8 @@ export default function AccessibilityPage() {
     setErrorMessage("");
 
     // Check if selected answer matches the correct answer
-    const isAnswerCorrect = currentQuestion.options[selectedOption] === currentQuestion.answer;
+    const isAnswerCorrect =
+      currentQuestion.options[selectedOption] === currentQuestion.answer;
 
     setIsCorrect(isAnswerCorrect);
   };
@@ -63,13 +64,23 @@ export default function AccessibilityPage() {
             className={`group cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl
               ${
                 selectedOption === index
-                  ? "outline outline-[3px] outline-purple"
+                  ? isCorrect === null
+                    ? "outline outline-[3px] outline-purple" // State is selected but not submitted
+                    : isCorrect
+                    ? "outline outline-[3px] outline-green" // State is correct answer is submitted
+                    : "outline outline-[3px] outline-red" // State is incorrect answer is submitted
                   : ""
               }`}
             onClick={() => handleOptionSelect(index)}>
             <span
               className={`group-hover:bg-fuchsia-100 group-hover:text-purple bg-light-grey text-grey-navy py-2 px-4 rounded-md text-2xl font-bold ${
-                selectedOption === index ? "bg-purple text-white" : ""
+                selectedOption === index
+                  ? isCorrect === null
+                    ? "bg-purple text-white"
+                    : isCorrect
+                    ? "bg-green text-white"
+                    : "bg-red text-white"
+                  : ""
               }`}>
               {optionLabels[index]}
             </span>
