@@ -10,6 +10,7 @@ export default function AccessibilityPage() {
   const [currentIndex, setCurrentIndex] = useState<number>(0); // It starts at the first question.
   const [submitText, setSubmitText] = useState<string>("Submit Answer");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const questions = quizData.quizzes[3].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
 
@@ -31,6 +32,11 @@ export default function AccessibilityPage() {
 
     setSubmitText("Next Question");
     setErrorMessage("");
+
+    // Check if selected answer matches the correct answer
+    const isAnswerCorrect = currentQuestion.options[selectedOption] === currentQuestion.answer;
+
+    setIsCorrect(isAnswerCorrect);
   };
 
   return (
