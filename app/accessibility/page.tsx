@@ -3,6 +3,9 @@
 import SubmitButton from "@/components/SubmitButton";
 import ProgressBar from "@/components/ProgressBar";
 import quizData from "@/app/data/data.json";
+import Image from "next/image";
+import errorIcon from "@/public/icon-error.svg";
+import correctIcon from "@/public/icon-correct.svg";
 import { useState } from "react";
 
 export default function AccessibilityPage() {
@@ -91,6 +94,8 @@ export default function AccessibilityPage() {
               {optionLabels[index]}
             </span>
             <h2 className="text-2xl font-semibold text-dark-navy">{option}</h2>
+            { ( selectedOption === index && isCorrect === true ) && <Image src={correctIcon} alt="correct icon"></Image> }
+            { ( selectedOption === index && isCorrect === false ) && <Image src={errorIcon} alt="error icon"></Image> }
           </li>
         ))}
 
