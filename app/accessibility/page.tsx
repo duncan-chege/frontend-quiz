@@ -66,11 +66,12 @@ export default function AccessibilityPage() {
             className={`group cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl
               ${
                 selectedOption === index
-                  ? isCorrect === null  // The user hasn't yet clicked 'Submit Answer'
+                  ? isCorrect === null  // The user hasn't yet clicked the button
                     ? "outline outline-[3px] outline-purple" // State is selected but not submitted
                     : isCorrect
                     ? "outline outline-[3px] outline-green" // State is correct answer is submitted
                     : "outline outline-[3px] outline-red" // State is incorrect answer is submitted
+                  : isSubmitted ? "opacity-50 pointer-events-none"  // The other options are NOT selected but the answer has been submitted
                   : ""
               }`}
             onClick={() => handleOptionSelect(index)}>
