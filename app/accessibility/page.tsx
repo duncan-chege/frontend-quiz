@@ -6,12 +6,12 @@ import quizData from "@/app/data/data.json";
 import { useState } from "react";
 
 export default function AccessibilityPage() {
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);  // Tracks the selected option
+  const [selectedOption, setSelectedOption] = useState<number | null>(null); // Tracks the selected option
   const [currentIndex, setCurrentIndex] = useState<number>(0); // It starts at the first question.
   const [submitText, setSubmitText] = useState<string>("Submit Answer");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // Stores if the answer is correct or incorrect
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false)  // Tracks if the answer has been submitted
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Tracks if the answer has been submitted
 
   const questions = quizData.quizzes[3].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
 
@@ -66,12 +66,15 @@ export default function AccessibilityPage() {
             className={`group cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl
               ${
                 selectedOption === index
-                  ? isCorrect === null  // The user hasn't yet clicked the button
-                    ? "outline outline-[3px] outline-purple" // State is selected but not submitted
-                    : isCorrect
-                    ? "outline outline-[3px] outline-green" // State is correct answer is submitted
-                    : "outline outline-[3px] outline-red" // State is incorrect answer is submitted
-                  : isSubmitted ? "opacity-50 pointer-events-none"  // The other options are NOT selected but the answer has been submitted
+                  ? `outline outline-[3px] ${
+                      isCorrect === null // The user hasn't yet clicked the button
+                        ? "outline-purple" // State is selected but not submitted
+                        : isCorrect
+                        ? "outline-green" // State is correct answer is submitted
+                        : "outline-red" // State is incorrect answer is submitted
+                    }`
+                  : isSubmitted
+                  ? "opacity-50 pointer-events-none" // The other options are NOT selected but the answer has been submitted
                   : ""
               }`}
             onClick={() => handleOptionSelect(index)}>
