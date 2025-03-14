@@ -97,14 +97,14 @@ export default function AccessibilityPage() {
               }`}
             onClick={() => handleOptionSelect(index)}>
             <span
-              className={`group-hover:bg-fuchsia-100 group-hover:text-purple bg-light-grey text-grey-navy py-2 px-4 rounded-md text-2xl font-bold ${
+              className={`group-hover:bg-fuchsia-100 group-hover:text-purple py-2 px-4 rounded-md text-2xl font-bold ${
                 selectedOption === index
                   ? isCorrect === null
                     ? "bg-purple text-white group-hover:bg-purple group-hover:text-white"
                     : isCorrect
                     ? "bg-green text-white group-hover:bg-green group-hover:text-white"
                     : "bg-red text-white group-hover:bg-red group-hover:text-white"
-                  : ""
+                  : "bg-light-grey text-grey-navy"
               }`}>
               {optionLabels[index]}
             </span>
