@@ -43,6 +43,8 @@ export default function AccessibilityPage() {
 
     setIsCorrect(isAnswerCorrect);
     setIsSubmitted(true); // Mark the answer as submitted
+
+    setCurrentIndex((prevIndex) => prevIndex + 1)
   };
 
   return (
@@ -104,7 +106,7 @@ export default function AccessibilityPage() {
           submitAnswer={submitAnswer}
           errorMessage={errorMessage}
           currentIndex={currentIndex}
-          setCurrentIndex={setCurrentIndex}
+          questions={questions}
         />
       </div>
     </div>

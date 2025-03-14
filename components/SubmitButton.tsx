@@ -1,12 +1,18 @@
 import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 
+interface Question {
+  question: string;
+  options: string[];
+  answer: string;
+}
+
 interface SubmitButtonProps {
   submitText: string;
   submitAnswer: () => void;
   errorMessage: string | null;
   currentIndex: number;
-  setCurrentIndex: (index:number) => void;
+  questions: Question[];
 }
 
 export default function SubmitButton({
@@ -14,13 +20,14 @@ export default function SubmitButton({
   submitAnswer,
   errorMessage,
   currentIndex,
-  setCurrentIndex
+  questions,
 }: SubmitButtonProps) {
   return (
     <div>
       <button
         className="hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg"
-        onClick={submitAnswer}>
+        onClick={submitAnswer}
+        disabled={currentIndex >= questions.length -1}>
         {submitText}
       </button>
 
