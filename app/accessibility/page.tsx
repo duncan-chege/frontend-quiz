@@ -7,6 +7,7 @@ import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
 import { useState } from "react";
+import ScoreScreen from "@/components/ScoreScreen";
 
 export default function AccessibilityPage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null); // Tracks the selected option
@@ -51,13 +52,18 @@ export default function AccessibilityPage() {
   };
 
   const nextQuestion = () => {
-    if (currentIndex < questions.length -1) { // Ensures that "Next Question" is only enabled when there's another question left
+    if (currentIndex < questions.length - 1) { // Ensures that "Next Question" is only enabled when there's another question left
       setCurrentIndex((prevIndex) => prevIndex + 1);  // Move to next question
       setSelectedOption(null);  // Reset selected option
       setIsSubmitted(false);  // Enable options again
       setSubmitText("Submit Answer"); // Reset button text
       setIsCorrect(null); // Reset correctness state for the next question
     }
+  }
+
+  if (currentIndex === questions.length - 1 ){
+    setSubmitText("View Score");
+    return <ScoreScreen score={score} questions={questions} />
   }
 
   return (
