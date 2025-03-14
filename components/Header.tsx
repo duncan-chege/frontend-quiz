@@ -6,7 +6,6 @@ import moonIcon from "@/public/icon-moon-dark.svg";
 import sunIcon from "@/public/icon-sun-dark.svg";
 import accessibilityIcon from "@/public/icon-accessibility.svg"
 
-
 export default function Header() {
     const pathname = usePathname(); // Get the current route
 

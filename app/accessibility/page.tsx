@@ -15,6 +15,7 @@ export default function AccessibilityPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // Stores if the answer is correct or incorrect
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Tracks if the answer has been submitted
+  const [score, setScore] = useState<number>(0);  // Tracks the score
 
   const questions = quizData.quizzes[3].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
 
@@ -44,7 +45,13 @@ export default function AccessibilityPage() {
     setIsCorrect(isAnswerCorrect);
     setIsSubmitted(true); // Mark the answer as submitted
 
+    // Moves to the next question by increasing current index by 1
     setCurrentIndex((prevIndex) => prevIndex + 1)
+
+    // Check if the selected answer is correct
+    if (questions[currentIndex].options[selectedOption] === questions[currentIndex].answer){
+      setScore(score + 1) // Increase the scpre by 1 for a correct answer
+    }
   };
 
   return (
