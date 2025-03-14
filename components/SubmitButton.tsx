@@ -13,6 +13,8 @@ interface SubmitButtonProps {
   errorMessage: string | null;
   currentIndex: number;
   questions: Question[];
+  isSubmitted: boolean;
+  nextQuestion: () => void;
 }
 
 export default function SubmitButton({
@@ -21,12 +23,14 @@ export default function SubmitButton({
   errorMessage,
   currentIndex,
   questions,
+  isSubmitted,
+  nextQuestion
 }: SubmitButtonProps) {
   return (
     <div>
       <button
         className="hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg"
-        onClick={submitAnswer}
+        onClick={isSubmitted ? nextQuestion : submitAnswer }
         disabled={currentIndex >= questions.length -1}>
         {submitText}
       </button>

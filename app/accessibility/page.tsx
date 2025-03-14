@@ -39,20 +39,26 @@ export default function AccessibilityPage() {
     setErrorMessage("");
 
     // Check if selected answer matches the correct answer
-    const isAnswerCorrect =
-      currentQuestion.options[selectedOption] === currentQuestion.answer;
+    const isAnswerCorrect = currentQuestion.options[selectedOption] === currentQuestion.answer;
 
     setIsCorrect(isAnswerCorrect);
     setIsSubmitted(true); // Mark the answer as submitted
 
-    // Moves to the next question by increasing current index by 1
-    setCurrentIndex((prevIndex) => prevIndex + 1)
-
     // Check if the selected answer is correct
-    if (questions[currentIndex].options[selectedOption] === questions[currentIndex].answer){
-      setScore(score + 1) // Increase the scpre by 1 for a correct answer
+    if (isAnswerCorrect){
+      setScore(prevScore => prevScore + 1) // Increase the score by 1 for a correct answer
     }
   };
+
+  const nextQuestion = () => {
+    if (currentIndex < questions.length -1) { // Ensures that "Next Question" is only enabled when there's another question left
+      setCurrentIndex((prevIndex) => prevIndex + 1);  // Move to next question
+      setSelectedOption(null);  // Reset selected option
+      setIsSubmitted(false);  // Enable options again
+      setSubmitText("Submit Answer"); // Reset button text
+      setIsCorrect(null); // Reset correctness state for the next question
+    }
+  }
 
   return (
     <div
@@ -114,6 +120,8 @@ export default function AccessibilityPage() {
           errorMessage={errorMessage}
           currentIndex={currentIndex}
           questions={questions}
+          isSubmitted={isSubmitted}
+          nextQuestion={nextQuestion}
         />
       </div>
     </div>
