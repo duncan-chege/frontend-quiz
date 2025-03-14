@@ -103,6 +103,8 @@ export default function AccessibilityPage() {
           submitText={submitText}
           submitAnswer={submitAnswer}
           errorMessage={errorMessage}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
         />
       </div>
     </div>

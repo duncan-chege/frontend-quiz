@@ -5,12 +5,16 @@ interface SubmitButtonProps {
   submitText: string;
   submitAnswer: () => void;
   errorMessage: string | null;
+  currentIndex: number;
+  setCurrentIndex: (index:number) => void;
 }
 
 export default function SubmitButton({
   submitText,
   submitAnswer,
   errorMessage,
+  currentIndex,
+  setCurrentIndex
 }: SubmitButtonProps) {
   return (
     <div>
