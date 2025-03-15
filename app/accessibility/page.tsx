@@ -36,23 +36,33 @@ export default function AccessibilityPage() {
       return; // Stop execution here if no option is selected
     }
 
-    setSubmitText("Next Question");
+    if (currentIndex === questions.length -1 ){
+      setSubmitText("View Score");  // This runs only when currentIndex changes
+    } else {
+      setSubmitText("Next Question");
+    }
     setErrorMessage("");
 
     // Check if selected answer matches the correct answer
     const isAnswerCorrect = currentQuestion.options[selectedOption] === currentQuestion.answer;
 
-    setIsCorrect(isAnswerCorrect);
-    setIsSubmitted(true); // Mark the answer as submitted
-
     // Check if the selected answer is correct
     if (isAnswerCorrect){
       setScore(prevScore => prevScore + 1) // Increase the score by 1 for a correct answer
     }
+
+    setIsCorrect(isAnswerCorrect);
+    setIsSubmitted(true); // Mark the answer as submitted
   };
 
+  // useEffect(() => { // Moving setSubmitText inside useEffect avoids unnecessary renders
+  //   if (currentIndex === questions.length -1 ){
+  //     setSubmitText("View Score");  // This runs only when currentIndex changes
+  //   } 
+  // }, [currentIndex]); // Dependency array ensures it runs only when currentIndex updates 
+
   const nextQuestion = () => {
-    if (currentIndex < questions.length - 1) { // Ensures that "Next Question" is only enabled when there's another question left
+   if (currentIndex < questions.length - 1) { // Ensures that "Next Question" is only enabled when there's another question left
       setCurrentIndex((prevIndex) => prevIndex + 1);  // Move to next question
       setSelectedOption(null);  // Reset selected option
       setIsSubmitted(false);  // Enable options again
@@ -60,14 +70,6 @@ export default function AccessibilityPage() {
       setIsCorrect(null); // Reset correctness state for the next question
     }
   }
-
-  useEffect(() => { // Moving setSubmitText inside useEffect avoids unnecessary renders
-    if (currentIndex === questions.length -1 ){
-      setSubmitText("View Score");  // This runs only when currentIndex changes
-    }
-  }, [currentIndex]); // Dependency array ensures it runs only when currentIndex updates 
-
-  
 
   return (
     <div
