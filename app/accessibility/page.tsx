@@ -6,7 +6,7 @@ import quizData from "@/app/data/data.json";
 import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ScoreScreen from "@/components/ScoreScreen";
 
 export default function AccessibilityPage() {
@@ -61,10 +61,13 @@ export default function AccessibilityPage() {
     }
   }
 
-  if (currentIndex === questions.length - 1 ){
-    setSubmitText("View Score");
-    return <ScoreScreen score={score} questions={questions} />
-  }
+  useEffect(() => { // Moving setSubmitText inside useEffect avoids unnecessary renders
+    if (currentIndex === questions.length -1 ){
+      setSubmitText("View Score");  // This runs only when currentIndex changes
+    }
+  }, [currentIndex]); // Dependency array ensures it runs only when currentIndex updates 
+
+  
 
   return (
     <div
