@@ -36,12 +36,14 @@ export default function AccessibilityPage() {
       return; // Stop execution here if no option is selected
     }
 
+    setErrorMessage("");
+
     if (currentIndex === questions.length -1 ){
       setSubmitText("View Score");  // This runs only when currentIndex changes
+      return <ScoreScreen score={score} questions={questions} />
     } else {
       setSubmitText("Next Question");
     }
-    setErrorMessage("");
 
     // Check if selected answer matches the correct answer
     const isAnswerCorrect = currentQuestion.options[selectedOption] === currentQuestion.answer;
@@ -54,12 +56,6 @@ export default function AccessibilityPage() {
     setIsCorrect(isAnswerCorrect);
     setIsSubmitted(true); // Mark the answer as submitted
   };
-
-  // useEffect(() => { // Moving setSubmitText inside useEffect avoids unnecessary renders
-  //   if (currentIndex === questions.length -1 ){
-  //     setSubmitText("View Score");  // This runs only when currentIndex changes
-  //   } 
-  // }, [currentIndex]); // Dependency array ensures it runs only when currentIndex updates 
 
   const nextQuestion = () => {
    if (currentIndex < questions.length - 1) { // Ensures that "Next Question" is only enabled when there's another question left
@@ -129,8 +125,6 @@ export default function AccessibilityPage() {
           submitText={submitText}
           submitAnswer={submitAnswer}
           errorMessage={errorMessage}
-          currentIndex={currentIndex}
-          questions={questions}
           isSubmitted={isSubmitted}
           nextQuestion={nextQuestion}
         />
