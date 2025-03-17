@@ -6,7 +6,7 @@ import quizData from "@/app/data/data.json";
 import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ScoreScreen from "@/components/ScoreScreen";
 
 export default function AccessibilityPage() {
@@ -17,6 +17,7 @@ export default function AccessibilityPage() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // Stores if the answer is correct or incorrect
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Tracks if the answer has been submitted
   const [score, setScore] = useState<number>(0);  // Tracks the score
+  const [quizFinished, setQuizFinished] = useState<boolean>(false);  // Tracks if the quiz is finished
 
   const questions = quizData.quizzes[3].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
 
@@ -40,7 +41,6 @@ export default function AccessibilityPage() {
 
     if (currentIndex === questions.length -1 ){
       setSubmitText("View Score");  // This runs only when currentIndex changes
-      return <ScoreScreen score={score} questions={questions} />
     } else {
       setSubmitText("Next Question");
     }
@@ -64,7 +64,13 @@ export default function AccessibilityPage() {
       setIsSubmitted(false);  // Enable options again
       setSubmitText("Submit Answer"); // Reset button text
       setIsCorrect(null); // Reset correctness state for the next question
+    } else {
+      setQuizFinished(true);  // Mark quiz as finished when last qn is answered
     }
+  }
+
+  if (quizFinished === true) {
+    return <ScoreScreen score={score} questions={questions} />;
   }
 
   return (
