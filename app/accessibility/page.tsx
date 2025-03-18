@@ -13,9 +13,6 @@ import ScoreScreen from "@/components/ScoreScreen";
 export default function AccessibilityPage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null); // Tracks the selected option
   const [currentIndex, setCurrentIndex] = useState<number>(0); // It starts at the first question.
-  const [submitText, setSubmitText] = useState<string>("Submit Answer");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // Stores if the answer is correct or incorrect
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Tracks if the answer has been submitted
   const [score, setScore] = useState<number>(0);  // Tracks the score
   const [quizFinished, setQuizFinished] = useState<boolean>(false);  // Tracks if the quiz is finished
