@@ -28,7 +28,7 @@ export default function ScoreScreen({score, questions}: ScoreScreenProps) {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32" role="main">
       <div>
         <h1 className="text-5xl font-light text-dark-navy">
-          Quiz Completed <span className="font-bold">You Scored...</span>
+          Quiz Completed <br/><span className="font-bold">You Scored...</span>
         </h1>
       </div>
       <div className="shadow-md shadow-gray-200 bg-white rounded-xl">
