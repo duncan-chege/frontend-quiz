@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
+import { QuizProvider } from "@/context/QuizContext";
 
 //Global Layout
 export const metadata: Metadata = {
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="pt-10 pb-4 px-8 md:px-20 lg:px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-mobile-light.svg')] md:bg-[url('/pattern-background-tablet-light.svg')] xl:bg-[url('/pattern-background-desktop-light.svg')]">
-        <Header />
+        <QuizProvider>
+          <Header />
+        </QuizProvider>
         {children}
       </body>
     </html>
