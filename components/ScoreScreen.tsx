@@ -1,19 +1,10 @@
 import { usePathname } from "next/navigation";
 import accessibilityIcon from "@/public/icon-accessibility.svg";
 import Image from "next/image";
+import { useQuiz } from "@/context/QuizContext"
 
-interface Question {
-    question: string;
-    options: string[];
-    answer: string;
-  }
-
-interface ScoreScreenProps {
-    score: number;
-    questions: Question[]
-}
-
-export default function ScoreScreen({score, questions}: ScoreScreenProps) {
+export default function ScoreScreen() {
+  const { score } = useQuiz();
 
   const pathname = usePathname(); // Get the current route
 
@@ -43,7 +34,7 @@ export default function ScoreScreen({score, questions}: ScoreScreenProps) {
           </h1>
         </div>
         <p className="font-bold text-6xl">{score}</p>
-        <p className="text-grey-navy">out of {questions.length}</p>
+        {/* <p className="text-grey-navy">out of {questions.length}</p> */}
         <button className="hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg">Play Again</button>
       </div>
     </div>

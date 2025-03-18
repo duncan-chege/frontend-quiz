@@ -2,20 +2,46 @@
 
 import SubmitButton from "@/components/SubmitButton";
 import ProgressBar from "@/components/ProgressBar";
-import quizData from "@/app/data/data.json";
+import quizData from "@/data/data.json";
 import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
 import { useState } from "react";
 import ScoreScreen from "@/components/ScoreScreen";
+import { useQuiz } from "@/context/QuizContext";
+
+// Define the shape of a question
+interface Question {
+  question: string;
+  options: string[];
+  answer: string;
+}
+
+interface QuizComponentProps {
+  questionsBloc: Question[];
+}
 
 
-export default function AccessibilityPage() {
-  const [selectedOption, setSelectedOption] = useState<number | null>(null); // Tracks the selected option
-  const [currentIndex, setCurrentIndex] = useState<number>(0); // It starts at the first question.
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Tracks if the answer has been submitted
-  const [score, setScore] = useState<number>(0);  // Tracks the score
-  const [quizFinished, setQuizFinished] = useState<boolean>(false);  // Tracks if the quiz is finished
+const QuizComponent: React.FC<QuizComponentProps> = ({ questionsBloc }) => {
+  const {
+    currentIndex,
+    setCurrentIndex,
+    selectedOption,
+    setSelectedOption,
+    isSubmitted,
+    setIsSubmitted,
+    score,
+    setScore,
+    quizFinished,
+    setQuizFinished,
+    submitText,
+    setSubmitText,
+    errorMessage,
+    setErrorMessage,
+    isCorrect,
+    setIsCorrect
+  } = useQuiz();
+
 
   const questions = quizData.quizzes[3].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
 
@@ -48,7 +74,7 @@ export default function AccessibilityPage() {
 
     // Check if the selected answer is correct
     if (isAnswerCorrect){
-      setScore(prevScore => prevScore + 1) // Increase the score by 1 for a correct answer
+      setScore(score + 1) // Increase the score by 1 for a correct answer
     }
 
     setIsCorrect(isAnswerCorrect);
@@ -57,7 +83,7 @@ export default function AccessibilityPage() {
 
   const nextQuestion = () => {
    if (currentIndex < questions.length - 1) { // Ensures that "Next Question" is only enabled when there's another question left
-      setCurrentIndex((prevIndex) => prevIndex + 1);  // Move to next question
+      setCurrentIndex(currentIndex + 1);  // Move to next question
       setSelectedOption(null);  // Reset selected option
       setIsSubmitted(false);  // Enable options again
       setSubmitText("Submit Answer"); // Reset button text
@@ -68,7 +94,7 @@ export default function AccessibilityPage() {
   }
 
   if (quizFinished === true) {
-    return <ScoreScreen score={score} questions={questions} />;
+    return <ScoreScreen />;
   }
 
   return (
