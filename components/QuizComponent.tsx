@@ -1,3 +1,5 @@
+// Handles all logic and rendering of the quizzes
+
 "use client";
 
 import SubmitButton from "@/components/SubmitButton";
@@ -6,44 +8,35 @@ import quizData from "@/data/data.json";
 import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
-import { useState } from "react";
 import ScoreScreen from "@/components/ScoreScreen";
 import { useQuiz } from "@/context/QuizContext";
 
-// Define the shape of a question
-interface Question {
-  question: string;
-  options: string[];
-  answer: string;
-}
-
 interface QuizComponentProps {
-  questionsBloc: Question[];
+  quizIndex: number;
 }
 
+export default function QuizComponent( { quizIndex }:QuizComponentProps ){
+    const {
+        currentIndex,
+        setCurrentIndex,
+        selectedOption,
+        setSelectedOption,
+        isSubmitted,
+        setIsSubmitted,
+        score,
+        setScore,
+        quizFinished,
+        setQuizFinished,
+        submitText,
+        setSubmitText,
+        errorMessage,
+        setErrorMessage,
+        isCorrect,
+        setIsCorrect
+    } = useQuiz();
 
-const QuizComponent: React.FC<QuizComponentProps> = ({ questionsBloc }) => {
-  const {
-    currentIndex,
-    setCurrentIndex,
-    selectedOption,
-    setSelectedOption,
-    isSubmitted,
-    setIsSubmitted,
-    score,
-    setScore,
-    quizFinished,
-    setQuizFinished,
-    submitText,
-    setSubmitText,
-    errorMessage,
-    setErrorMessage,
-    isCorrect,
-    setIsCorrect
-  } = useQuiz();
 
-
-  const questions = quizData.quizzes[3].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
+  const questions = quizData.quizzes[quizIndex].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
 
   // questions is the full array of questions.
   // questions[currentIndex] picks one question based on currentIndex.
