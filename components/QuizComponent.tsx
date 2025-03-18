@@ -8,8 +8,9 @@ import quizData from "@/data/data.json";
 import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
-import ScoreScreen from "@/components/ScoreScreen";
 import { useQuiz } from "@/context/QuizContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface QuizComponentProps {
   quizIndex: number;
@@ -35,7 +36,6 @@ export default function QuizComponent( { quizIndex }:QuizComponentProps ){
         setIsCorrect
     } = useQuiz();
 
-
   const questions = quizData.quizzes[quizIndex].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
 
   // questions is the full array of questions.
@@ -43,6 +43,8 @@ export default function QuizComponent( { quizIndex }:QuizComponentProps ){
   const currentQuestion = questions[currentIndex];
 
   const optionLabels = ["A", "B", "C", "D"];
+
+  const router = useRouter(); // Initialize router
 
   const handleOptionSelect = (option: number) => {
     setSelectedOption(option);
@@ -74,6 +76,13 @@ export default function QuizComponent( { quizIndex }:QuizComponentProps ){
     setIsSubmitted(true); // Mark the answer as submitted
   };
 
+  // Redirect to final score page
+  useEffect(() => {
+    if(quizFinished){
+      router.push("/accessibility/final-score");
+    }
+  }, [quizFinished]);
+
   const nextQuestion = () => {
    if (currentIndex < questions.length - 1) { // Ensures that "Next Question" is only enabled when there's another question left
       setCurrentIndex(currentIndex + 1);  // Move to next question
@@ -82,12 +91,8 @@ export default function QuizComponent( { quizIndex }:QuizComponentProps ){
       setSubmitText("Submit Answer"); // Reset button text
       setIsCorrect(null); // Reset correctness state for the next question
     } else {
-      setQuizFinished(true);  // Mark quiz as finished when last qn is answered
+      setQuizFinished(true);  // Mark quiz as finished when last qn is answered. It will trigger the useEffect and navigate
     }
-  }
-
-  if (quizFinished === true) {
-    return <ScoreScreen />;
   }
 
   return (
