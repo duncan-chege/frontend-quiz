@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useQuiz } from "@/context/QuizContext";
 
 export default function ScoreScreen() {
-  const { score } = useQuiz();
+  const { score, totalQuestions } = useQuiz();
 
   const pathname = usePathname();
 
@@ -42,7 +42,7 @@ export default function ScoreScreen() {
           </h1>
         </div>
         <p className="font-bold text-6xl">{score}</p>
-        <p className="text-grey-navy">out of {questions.length}</p>
+        <p className="text-grey-navy">out of {totalQuestions}</p>
         <button className="hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg">
           Play Again
         </button>

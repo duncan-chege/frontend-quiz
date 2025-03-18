@@ -16,27 +16,33 @@ interface QuizComponentProps {
   quizIndex: number;
 }
 
-export default function QuizComponent( { quizIndex }:QuizComponentProps ){
-    const {
-        currentIndex,
-        setCurrentIndex,
-        selectedOption,
-        setSelectedOption,
-        isSubmitted,
-        setIsSubmitted,
-        score,
-        setScore,
-        quizFinished,
-        setQuizFinished,
-        submitText,
-        setSubmitText,
-        errorMessage,
-        setErrorMessage,
-        isCorrect,
-        setIsCorrect
-    } = useQuiz();
+export default function QuizComponent({ quizIndex }: QuizComponentProps) {
+  const {
+    currentIndex,
+    setCurrentIndex,
+    selectedOption,
+    setSelectedOption,
+    isSubmitted,
+    setIsSubmitted,
+    score,
+    setScore,
+    quizFinished,
+    setQuizFinished,
+    submitText,
+    setSubmitText,
+    errorMessage,
+    setErrorMessage,
+    isCorrect,
+    setIsCorrect,
+    setTotalQuestions,
+  } = useQuiz();
 
-  const questions = quizData.quizzes[quizIndex].questions; // Selects the 4th object in the array- The Accessibility quiz. It then extracts the questions array from that quiz
+  const questions = quizData.quizzes[quizIndex].questions; // Selects the nth object in the array and extracts the questions array from that quiz
+
+  // Updating the total no. of questions before starting the quiz
+  useEffect(() => {
+    setTotalQuestions(questions.length);
+  }, [questions.length]);
 
   // questions is the full array of questions.
   // questions[currentIndex] picks one question based on currentIndex.
@@ -58,18 +64,19 @@ export default function QuizComponent( { quizIndex }:QuizComponentProps ){
 
     setErrorMessage("");
 
-    if (currentIndex === questions.length -1 ){
-      setSubmitText("View Score");  // This runs only when currentIndex changes
+    if (currentIndex === questions.length - 1) {
+      setSubmitText("View Score"); // This runs only when currentIndex changes
     } else {
       setSubmitText("Next Question");
     }
 
     // Check if selected answer matches the correct answer
-    const isAnswerCorrect = currentQuestion.options[selectedOption] === currentQuestion.answer;
+    const isAnswerCorrect =
+      currentQuestion.options[selectedOption] === currentQuestion.answer;
 
     // Check if the selected answer is correct
-    if (isAnswerCorrect){
-      setScore(score + 1) // Increase the score by 1 for a correct answer
+    if (isAnswerCorrect) {
+      setScore(score + 1); // Increase the score by 1 for a correct answer
     }
 
     setIsCorrect(isAnswerCorrect);
@@ -78,22 +85,23 @@ export default function QuizComponent( { quizIndex }:QuizComponentProps ){
 
   // Redirect to final score page
   useEffect(() => {
-    if(quizFinished){
+    if (quizFinished) {
       router.push("/accessibility/final-score");
     }
   }, [quizFinished]);
 
   const nextQuestion = () => {
-   if (currentIndex < questions.length - 1) { // Ensures that "Next Question" is only enabled when there's another question left
-      setCurrentIndex(currentIndex + 1);  // Move to next question
-      setSelectedOption(null);  // Reset selected option
-      setIsSubmitted(false);  // Enable options again
+    if (currentIndex < questions.length - 1) {
+      // Ensures that "Next Question" is only enabled when there's another question left
+      setCurrentIndex(currentIndex + 1); // Move to next question
+      setSelectedOption(null); // Reset selected option
+      setIsSubmitted(false); // Enable options again
       setSubmitText("Submit Answer"); // Reset button text
       setIsCorrect(null); // Reset correctness state for the next question
     } else {
-      setQuizFinished(true);  // Mark quiz as finished when last qn is answered. It will trigger the useEffect and navigate
+      setQuizFinished(true); // Mark quiz as finished when last qn is answered. It will trigger the useEffect and navigate
     }
-  }
+  };
 
   return (
     <div
@@ -144,8 +152,12 @@ export default function QuizComponent( { quizIndex }:QuizComponentProps ){
               {optionLabels[index]}
             </span>
             <h2 className="text-2xl font-semibold text-dark-navy">{option}</h2>
-            { ( selectedOption === index && isCorrect === true ) && <Image src={correctIcon} alt="correct icon"></Image> }
-            { ( selectedOption === index && isCorrect === false ) && <Image src={errorIcon} alt="error icon"></Image> }
+            {selectedOption === index && isCorrect === true && (
+              <Image src={correctIcon} alt="correct icon"></Image>
+            )}
+            {selectedOption === index && isCorrect === false && (
+              <Image src={errorIcon} alt="error icon"></Image>
+            )}
           </li>
         ))}
 

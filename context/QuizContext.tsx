@@ -20,6 +20,8 @@ interface QuizContextType {
   setErrorMessage: (errorMessage: string | null) => void;
   isCorrect: boolean | null;
   setIsCorrect: (isCorrect: boolean | null) => void;
+  totalQuestions: number;
+  setTotalQuestions: (totalQuestions:number) => void;
 }
 
 // Create context with an undefined default value (will be provided later)
@@ -49,6 +51,7 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
   const [submitText, setSubmitText] = useState<string>("Submit Answer");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // Stores if the answer is correct or incorrect
+  const [totalQuestions, setTotalQuestions] = useState<number>(0);
 
   return (
     <QuizContext.Provider
@@ -68,7 +71,9 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
         errorMessage,
         setErrorMessage,
         isCorrect,
-        setIsCorrect
+        setIsCorrect,
+        totalQuestions,
+        setTotalQuestions
       }}>
       {children}
     </QuizContext.Provider>
