@@ -7,16 +7,22 @@ import sunIcon from "@/public/icon-sun-dark.svg";
 import accessibilityIcon from "@/public/icon-accessibility.svg"
 
 export default function Header() {
-    const pathname = usePathname(); // Get the current route
+  const pathname = usePathname(); // Get the current route
 
-    // Define titles and images based on the route
-    const pageData: {[key:string]: { title: string; icon: string }} = {
-        "/" : {title: "", icon: ""},
-        "/accessibility": {title: "Accessibility", icon: accessibilityIcon },
-    }
+  // Define dynamic titles and icons based on keywords in the URL
+  const dynamicPageData: { [key: string]: { title: string; icon: string } } = {
+    "accessibility": { title: "Accessibility", icon: accessibilityIcon },
+    // "html": { title: "HTML", icon: htmlIcon },
+    // "css": { title: "CSS", icon: cssIcon }
+  };
 
-    // Set the heading based on the pathname, default to "". Destructuring the pageData object
-    const { title, icon } = pageData[pathname] || {title: "", icon: ""}
+  // Find the first matching keyword in pathname
+  const matchingKey = Object.keys(dynamicPageData).find((key) => 
+    pathname.includes(key.toLowerCase())
+  );
+
+  // If a match is found, use its title and icon; otherwise set empty values
+  const {title, icon} = matchingKey ? dynamicPageData[matchingKey] : { title: "", icon: "" }
 
   return (
     <header className="flex justify-between pb-12">
