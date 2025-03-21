@@ -10,7 +10,7 @@ import cssIcon from "@/public/icon-css.svg"
 import htmlIcon from "@/public/icon-html.svg"
 
 export default function ScoreScreen() {
-  const { score, totalQuestions } = useQuiz();
+  const { score, totalQuestions, resetQuiz } = useQuiz();
 
   const pathname = usePathname();
 
@@ -63,7 +63,7 @@ export default function ScoreScreen() {
           <p className="text-grey-navy text-lg">out of {totalQuestions}</p>
         </div>
 
-        <Link href="/">
+        <Link href="/" onClick={resetQuiz}>
           <button className="mt-8 hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg">
             Play Again
           </button>

@@ -22,6 +22,7 @@ interface QuizContextType {
   setIsCorrect: (isCorrect: boolean | null) => void;
   totalQuestions: number;
   setTotalQuestions: (totalQuestions:number) => void;
+  resetQuiz: () => void;  // Add a reset function
 }
 
 // Create context with an undefined default value (will be provided later)
@@ -53,6 +54,19 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null); // Stores if the answer is correct or incorrect
   const [totalQuestions, setTotalQuestions] = useState<number>(0);
 
+  // Function to reset all states
+  const resetQuiz = () => {
+    setCurrentIndex(0);
+    setSelectedOption(null);
+    setIsSubmitted(false);
+    setScore(0);
+    setQuizFinished(false);
+    setSubmitText("Submit Answer");
+    setErrorMessage("");
+    setIsCorrect(null);
+    setTotalQuestions(0);
+  };
+
   return (
     <QuizContext.Provider
       value={{
@@ -73,7 +87,8 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
         isCorrect,
         setIsCorrect,
         totalQuestions,
-        setTotalQuestions
+        setTotalQuestions,
+        resetQuiz,  // Provide the reset function
       }}>
       {children}
     </QuizContext.Provider>
