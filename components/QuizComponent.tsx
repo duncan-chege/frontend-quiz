@@ -1,5 +1,4 @@
 // Handles all logic and rendering of the quizzes
-
 "use client";
 
 import SubmitButton from "@/components/SubmitButton";
@@ -9,7 +8,7 @@ import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
 import { useQuiz } from "@/context/QuizContext";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 interface QuizComponentProps {
@@ -35,14 +34,20 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
     isCorrect,
     setIsCorrect,
     setTotalQuestions,
+    resetQuiz   // Get reset function
   } = useQuiz();
 
   const questions = quizData.quizzes[quizIndex].questions; // Selects the nth object in the array and extracts the questions array from that quiz
 
+  const pathname = usePathname(); // Get current route
+
   // Updating the total no. of questions before starting the quiz
   useEffect(() => {
     setTotalQuestions(questions.length);
-  }, [questions.length]);
+    if (pathname === "/"){
+      resetQuiz();
+    }
+  }, [questions.length, pathname]);
 
   // questions is the full array of questions.
   // questions[currentIndex] picks one question based on currentIndex.
