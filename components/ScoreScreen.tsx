@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import accessibilityIcon from "@/public/icon-accessibility.svg";
+import javascriptIcon from "@/public/icon-js.svg";
 import Image from "next/image";
 import { useQuiz } from "@/context/QuizContext";
 import Link from "next/link";
@@ -13,6 +14,7 @@ export default function ScoreScreen() {
 
   const dynamicPageData: { [key: string]: { title: string; icon: string } } = {
     accessibility: { title: "Accessibility", icon: accessibilityIcon },
+    javascript: { title: "Javascript", icon: javascriptIcon },
     // "html": { title: "HTML", icon: htmlIcon },
     // "css": { title: "CSS", icon: cssIcon }
   };
@@ -37,7 +39,13 @@ export default function ScoreScreen() {
         <div className="flex flex-col items-center gap-y-8 shadow-xl shadow-gray-200 bg-white rounded-xl py-10 px-16">
           <div className="flex items-center gap-x-4">
             <Image
-              className="p-2 bg-fuchsia-100 rounded-md"
+              className={`p-2 rounded-md ${
+                title === "Accessibility"
+                  ? "bg-fuchsia-100"
+                  : title === "Javascript"
+                  ? "bg-blue-100"
+                  : ""
+              }`}
               src={icon}
               alt={`${title} icon`}
             />
@@ -50,9 +58,9 @@ export default function ScoreScreen() {
         </div>
 
         <Link href="/">
-        <button className="mt-8 hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg">
-          Play Again
-        </button>
+          <button className="mt-8 hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg">
+            Play Again
+          </button>
         </Link>
       </div>
     </div>

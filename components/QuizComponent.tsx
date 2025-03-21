@@ -86,9 +86,26 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
   // Redirect to final score page
   useEffect(() => {
     if (quizFinished) {
-      router.push("/accessibility/final-score");
+      let category = ""; // Default empty category
+
+      // Determine category based on quizIndex
+      switch(quizIndex){
+        case 1:
+          category = "html";
+          break;
+        case 2:
+          category = "css";
+          break;
+        case 3:
+          category = "javascript";
+          break;
+        case 4:
+          category = "accessibility";
+          break;
+      }
+      router.push(`/${category}/final-score`);
     }
-  }, [quizFinished]);
+  }, [quizFinished, quizIndex]);
 
   const nextQuestion = () => {
     if (currentIndex < questions.length - 1) {
