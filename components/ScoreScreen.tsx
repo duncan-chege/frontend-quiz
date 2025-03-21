@@ -1,12 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import accessibilityIcon from "@/public/icon-accessibility.svg";
-import javascriptIcon from "@/public/icon-js.svg";
-import cssIcon from "@/public/icon-css.svg"
 import Image from "next/image";
 import { useQuiz } from "@/context/QuizContext";
 import Link from "next/link";
+import accessibilityIcon from "@/public/icon-accessibility.svg";
+import javascriptIcon from "@/public/icon-js.svg";
+import cssIcon from "@/public/icon-css.svg"
+import htmlIcon from "@/public/icon-html.svg"
 
 export default function ScoreScreen() {
   const { score, totalQuestions } = useQuiz();
@@ -16,8 +17,8 @@ export default function ScoreScreen() {
   const dynamicPageData: { [key: string]: { title: string; icon: string } } = {
     accessibility: { title: "Accessibility", icon: accessibilityIcon },
     javascript: { title: "Javascript", icon: javascriptIcon },
-    css: { title: "CSS", icon: cssIcon }
-    // "html": { title: "HTML", icon: htmlIcon },
+    css: { title: "CSS", icon: cssIcon },
+    html : { title: "HTML", icon: htmlIcon },
   };
 
   const matchingKey = Object.keys(dynamicPageData).find((key) =>
@@ -47,6 +48,8 @@ export default function ScoreScreen() {
                   ? "bg-blue-100"
                   : title === "CSS"
                   ? "bg-emerald-100"
+                  : title === "HTML"
+                  ? "bg-orange-100"
                   : ""
               }`}
               src={icon}
