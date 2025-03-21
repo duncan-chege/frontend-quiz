@@ -90,16 +90,16 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
 
       // Determine category based on quizIndex
       switch(quizIndex){
-        case 1:
+        case 0:
           category = "html";
           break;
-        case 2:
+        case 1:
           category = "css";
           break;
-        case 3:
+        case 2:
           category = "javascript";
           break;
-        case 4:
+        case 3:
           category = "accessibility";
           break;
       }
