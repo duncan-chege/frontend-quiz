@@ -59,12 +59,10 @@ export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
     setCurrentIndex(0);
     setSelectedOption(null);
     setIsSubmitted(false);
-    setScore(0);
     setQuizFinished(false);
     setSubmitText("Submit Answer");
     setErrorMessage("");
     setIsCorrect(null);
-    setTotalQuestions(0);
   };
 
   return (
