@@ -33,7 +33,7 @@ export default function ScoreScreen() {
           <span className="font-bold">You Scored...</span>
         </h1>
       </div>
-      <div className="w-4/5">
+      <div className="w-full md:w-4/5 lg:w-full xl:w-4/5 mt-12 md:mt-12 lg:mt-0">
         <div className="flex flex-col items-center gap-y-8 shadow-xl shadow-gray-200 bg-white rounded-xl py-10 px-16">
           <div className="flex items-center gap-x-4">
             <Image
@@ -45,8 +45,8 @@ export default function ScoreScreen() {
               {title}
             </h1>
           </div>
-          <p className="font-bold text-6xl">{score}</p>
-          <p className="text-grey-navy">out of {totalQuestions}</p>
+          <p className="font-bold text-8xl">{score}</p>
+          <p className="text-grey-navy text-lg">out of {totalQuestions}</p>
         </div>
 
         <Link href="/">

@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="pt-10 pb-4 px-8 md:px-20 lg:px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-mobile-light.svg')] md:bg-[url('/pattern-background-tablet-light.svg')] xl:bg-[url('/pattern-background-desktop-light.svg')]">
+      <body className="pt-10 pb-4 px-8 md:px-20 xl:px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-mobile-light.svg')] md:bg-[url('/pattern-background-tablet-light.svg')] xl:bg-[url('/pattern-background-desktop-light.svg')]">
         <QuizProvider>
           <Header />
           {children}
