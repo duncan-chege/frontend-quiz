@@ -6,6 +6,7 @@ import moonIcon from "@/public/icon-moon-dark.svg";
 import sunIcon from "@/public/icon-sun-dark.svg";
 import accessibilityIcon from "@/public/icon-accessibility.svg";
 import javascriptIcon from "@/public/icon-js.svg";
+import cssIcon from "@/public/icon-css.svg";
 
 export default function Header() {
   const pathname = usePathname(); // Get the current route
@@ -14,8 +15,8 @@ export default function Header() {
   const dynamicPageData: { [key: string]: { title: string; icon: string } } = {
     accessibility: { title: "Accessibility", icon: accessibilityIcon },
     javascript: { title: "Javascript", icon: javascriptIcon },
+    css : { title: "CSS", icon: cssIcon }
     // "html": { title: "HTML", icon: htmlIcon },
-    // "css": { title: "CSS", icon: cssIcon }
   };
 
   // Find the first matching keyword in pathname
@@ -38,6 +39,8 @@ export default function Header() {
                 ? "bg-fuchsia-100"
                 : title === "Javascript"
                 ? "bg-blue-100"
+                : title === "CSS"
+                ? "bg-emerald-100"
                 : ""
             }`}
             src={icon}

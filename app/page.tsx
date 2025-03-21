@@ -19,10 +19,13 @@ export default function HomePage() {
           <Image src={htmlIcon} alt="html icon" className="p-2 bg-orange-100 rounded-md" />
           <h2 className="text-2xl font-semibold text-dark-navy">HTML</h2>
         </div>
+
+        <Link href="css">
         <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
           <Image src={cssIcon} alt="css icon" className="p-2 bg-emerald-100 rounded-md" />
           <h2 className="text-2xl font-semibold text-dark-navy">CSS</h2>
         </div>
+        </Link>
 
         <Link href="/javascript">
         <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
