@@ -34,20 +34,24 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
     isCorrect,
     setIsCorrect,
     setTotalQuestions,
-    resetQuiz   // Get reset function
+    resetQuiz, // Get reset function
   } = useQuiz();
 
   const questions = quizData.quizzes[quizIndex].questions; // Selects the nth object in the array and extracts the questions array from that quiz
 
   const pathname = usePathname(); // Get current route
 
-  // Updating the total no. of questions before starting the quiz
+  // Reset quiz only when returning to homepage
   useEffect(() => {
-    setTotalQuestions(questions.length);
-    if (pathname === "/"){
+    if (pathname === "/") {
       resetQuiz();
     }
-  }, [questions.length, pathname]);
+  }, [pathname]); // Only runs when pathname changes
+
+  // Set total number of questions when quiz starts
+  useEffect(() => {
+    setTotalQuestions(questions.length);
+  }, [questions.length]); // Only runs when questions.length changes
 
   // questions is the full array of questions.
   // questions[currentIndex] picks one question based on currentIndex.
@@ -94,7 +98,7 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
       let category = ""; // Default empty category
 
       // Determine category based on quizIndex
-      switch(quizIndex){
+      switch (quizIndex) {
         case 0:
           category = "html";
           break;

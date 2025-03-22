@@ -17,7 +17,7 @@ export default function HomePage() {
         </p>
       </div>
       <div className="flex flex-col gap-y-6">
-        <Link href="html">
+        <Link href="/html">
           <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
             <Image
               src={htmlIcon}
@@ -28,7 +28,7 @@ export default function HomePage() {
           </div>
         </Link>
 
-        <Link href="css">
+        <Link href="/css">
           <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
             <Image
               src={cssIcon}
