@@ -44,11 +44,14 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
   // Reset quiz only when returning to homepage
   useEffect(() => {
     if (pathname === "/") {
-      setTimeout(() => {
-        resetQuiz();
-      }, 0) // Runs after the page fully loads
+      const timer = setTimeout(() => {
+        resetQuiz(); // Reset the quiz after 3 seconds
+      }, 3000); 
+  
+      return () => clearTimeout(timer); // Cleanup timeout on unmount
     }
-  }, [pathname]); // Only runs when pathname changes
+  }, [pathname]);
+  
 
   // Set total number of questions when quiz starts
   useEffect(() => {
