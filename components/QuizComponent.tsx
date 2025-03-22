@@ -44,7 +44,9 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
   // Reset quiz only when returning to homepage
   useEffect(() => {
     if (pathname === "/") {
-      resetQuiz();
+      setTimeout(() => {
+        resetQuiz();
+      }, 0) // Runs after the page fully loads
     }
   }, [pathname]); // Only runs when pathname changes
 
