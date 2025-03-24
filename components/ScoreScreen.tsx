@@ -3,7 +3,6 @@
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import { useQuiz } from "@/context/QuizContext";
-import Link from "next/link";
 import accessibilityIcon from "@/public/icon-accessibility.svg";
 import javascriptIcon from "@/public/icon-js.svg";
 import cssIcon from "@/public/icon-css.svg"
