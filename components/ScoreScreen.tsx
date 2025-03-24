@@ -31,11 +31,11 @@ export default function ScoreScreen() {
     : { title: "", icon: "" };
 
   const handlePlayAgain = () => {
-    router.push("/"); // Navigate to the homepage
+    router.push("/"); // Navigation happens first
 
     setTimeout(() => {
       resetQuiz();  // Reset state after navigation
-    }, 100);
+    }, 100);  // This short 100ms delay prevents unwanted UI flickers
   }
 
   return (
