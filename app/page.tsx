@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import htmlIcon from "@/public/icon-html.svg";
 import cssIcon from "@/public/icon-css.svg";
 import jsIcon from "@/public/icon-js.svg";
 import accessibilityIcon from "@/public/icon-accessibility.svg";
 import Link from "next/link";
+import { useQuiz } from "@/context/QuizContext";
+import { useEffect } from "react";
 
 export default function HomePage() {
   return (

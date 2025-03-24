@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import { useQuiz } from "@/context/QuizContext";
 import Link from "next/link";
@@ -13,6 +13,7 @@ export default function ScoreScreen() {
   const { score, totalQuestions, resetQuiz } = useQuiz();
 
   const pathname = usePathname();
+  const router = useRouter(); // Initialize router
 
   const dynamicPageData: { [key: string]: { title: string; icon: string } } = {
     accessibility: { title: "Accessibility", icon: accessibilityIcon },
@@ -28,6 +29,14 @@ export default function ScoreScreen() {
   const { title, icon } = matchingKey
     ? dynamicPageData[matchingKey]
     : { title: "", icon: "" };
+
+  const handlePlayAgain = () => {
+    router.push("/"); // Navigate to the homepage
+
+    setTimeout(() => {
+      resetQuiz();  // Reset state after navigation
+    }, 100);
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32" role="main">
@@ -63,11 +72,9 @@ export default function ScoreScreen() {
           <p className="text-grey-navy text-lg">out of {totalQuestions}</p>
         </div>
 
-        <Link href="/" onClick={() => resetQuiz()}>
-          <button className="mt-8 hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg">
+          <button onClick={handlePlayAgain} className="mt-8 hover:bg-fuchsia-400 w-full bg-purple cursor-pointer p-4 rounded-xl text-white text-lg">
             Play Again
           </button>
-        </Link>
       </div>
     </div>
   );
