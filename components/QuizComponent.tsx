@@ -9,7 +9,7 @@ import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
 import { useQuiz } from "@/context/QuizContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 
 interface QuizComponentProps {
   quizIndex: number;
@@ -51,9 +51,52 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
 
   const router = useRouter(); // Initialize router
 
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (isSubmitted) {
+      if (event.key === "Enter") {
+        nextQuestion(); // Move to the next question
+      }
+      return; // Prevent further key actions after submission
+    }
+
+    if (event.key === "Enter" && selectedOption !== null) {
+      submitAnswer(); // Submit the selected answer
+      return;
+    } else if (event.key === "Enter" && selectedOption === null) {
+      setErrorMessage("Please select an answer");
+    }
+
+    if (event.key === "ArrowDown") {
+      const nextValue =
+        selectedOption === null
+          ? 0
+          : Math.min(selectedOption + 1, currentQuestion.options.length - 1); // Arrow moves down but stops at the last option
+      setSelectedOption(nextValue);
+    } else if (event.key === "ArrowUp") {
+      const nextValue =
+        selectedOption === null
+          ? 0 // Start from 0 instead of doing nothing
+          : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
+      setSelectedOption(nextValue);
+    }
+  };
+
   const handleOptionSelect = (option: number) => {
     setSelectedOption(option);
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [selectedOption, isSubmitted, currentIndex]);
+
+  useEffect(() => {
+    if (document.activeElement instanceof HTMLElement) {  // Ensures it's a valid focusable element before calling .blur()
+      document.activeElement.blur(); // Removes focus from any element
+    }
+  }, [currentIndex, handleKeyPress]); // Runs when a new question loads
 
   const submitAnswer = () => {
     if (selectedOption === null) {
@@ -118,61 +161,6 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
       setQuizFinished(true); // Mark quiz as finished when last qn is answered. It will trigger the useEffect and navigate
     }
   };
-
-  const handleKeyPress = useCallback(
-    (event: KeyboardEvent) => {
-      if (isSubmitted) {
-        if (event.key === "Enter") {
-          nextQuestion(); // Move to the next question
-        }
-        return; // Prevent further key actions after submission
-      }
-
-      if (event.key === "Enter" && selectedOption !== null) {
-        submitAnswer(); // Submit the selected answer
-        return;
-      } else if (event.key === "Enter" && selectedOption === null) {
-        setErrorMessage("Please select an answer");
-      }
-
-      if (event.key === "ArrowDown") {
-        const nextValue =
-          selectedOption === null
-            ? 0
-            : Math.min(selectedOption + 1, currentQuestion.options.length - 1); // Arrow moves down but stops at the last option
-        setSelectedOption(nextValue);
-      } else if (event.key === "ArrowUp") {
-        const nextValue =
-          selectedOption === null
-            ? 0 // Start from 0 instead of doing nothing
-            : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
-        setSelectedOption(nextValue);
-      }
-    },
-    [
-      isSubmitted,
-      nextQuestion,
-      setErrorMessage,
-      setSelectedOption,
-      submitAnswer,
-      selectedOption,
-      currentQuestion.options.length,
-    ]
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyPress);
-    return () => {
-      window.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleKeyPress]);
-
-  useEffect(() => {
-    if (document.activeElement instanceof HTMLElement) {
-      // Ensures it's a valid focusable element before calling .blur()
-      document.activeElement.blur(); // Removes focus from any element
-    }
-  }, [currentIndex, handleKeyPress]); // Runs when a new question loads
 
   return (
     <div
