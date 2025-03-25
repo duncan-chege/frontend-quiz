@@ -8,7 +8,7 @@ import Image from "next/image";
 import errorIcon from "@/public/icon-error.svg";
 import correctIcon from "@/public/icon-correct.svg";
 import { useQuiz } from "@/context/QuizContext";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 interface QuizComponentProps {
@@ -39,8 +39,6 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
 
   const questions = quizData.quizzes[quizIndex].questions; // Selects the nth object in the array and extracts the questions array from that quiz
 
-  const pathname = usePathname(); // Get current route
-
   // Set total number of questions when quiz starts
   useEffect(() => {
     setTotalQuestions(questions.length);
@@ -54,9 +52,34 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
 
   const router = useRouter(); // Initialize router
 
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "ArrowDown") {
+      const nextValue =
+        selectedOption === null
+          ? 0
+          : Math.min(selectedOption + 1, currentQuestion.options.length - 1);
+      setSelectedOption(nextValue);
+    } else if (event.key === "ArrowUp") {
+      const nextValue =
+        selectedOption === null
+          ? 0 // Start from 0 instead of doing nothing
+          : Math.max(selectedOption - 1, 0);
+      setSelectedOption(nextValue);
+    } else if (event.key === "Enter" && selectedOption !== null) {
+      handleOptionSelect(selectedOption);
+    }
+  };
+
   const handleOptionSelect = (option: number) => {
     setSelectedOption(option);
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [selectedOption, currentIndex]);
 
   const submitAnswer = () => {
     if (selectedOption === null) {
