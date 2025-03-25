@@ -53,6 +53,20 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
   const router = useRouter(); // Initialize router
 
   const handleKeyPress = (event: KeyboardEvent) => {
+    if (isSubmitted) {
+      if (event.key === "Enter") {
+        nextQuestion(); // Move to the next question
+      }
+      return; // Prevent further key actions after submission
+    }
+
+    if (event.key === "Enter" && selectedOption !== null) {
+      submitAnswer(); // Submit the selected answer
+      return;
+    } else if (event.key === "Enter" && selectedOption === null) {
+      setErrorMessage("Please select an answer");
+    }
+
     if (event.key === "ArrowDown") {
       const nextValue =
         selectedOption === null
@@ -65,8 +79,6 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
           ? 0 // Start from 0 instead of doing nothing
           : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
       setSelectedOption(nextValue);
-    } else if (event.key === "Enter" && selectedOption !== null) {
-      handleOptionSelect(selectedOption);
     }
   };
 
@@ -79,7 +91,7 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [selectedOption, currentIndex]);
+  }, [selectedOption, isSubmitted, currentIndex]);
 
   const submitAnswer = () => {
     if (selectedOption === null) {

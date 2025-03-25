@@ -37,11 +37,11 @@ export default function HomePage() {
       setSelectedOption(nextValue);
     } else if (event.key === "Enter" && selectedOption !== null) {
       const selectedOptionElement = document.querySelector(
-        `[data-option-index="${selectedOption}"]`
+        `[data-option-index="${selectedOption}"]` // Find the selected Link element using the data attribute
     ) as HTMLAnchorElement | null;
     
     if (selectedOptionElement) {
-        selectedOptionElement.click();
+        selectedOptionElement.click();  // Trigger a click event on the actual Link component
     }
     }
   };
@@ -68,7 +68,7 @@ export default function HomePage() {
           <Link
             key={option.href}
             href={option.href}
-            data-option-index={index}
+            data-option-index={index} // Add a data-option-index attribute to each Link component to identify them
             className={`cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl ${
               selectedOption === index
                 ? "outline outline-[3px] outline-purple"
