@@ -36,12 +36,14 @@ export default function HomePage() {
           : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
       setSelectedOption(nextValue);
     } else if (event.key === "Enter" && selectedOption !== null) {
-      handleOptionSelect(selectedOption);
+      const selectedOptionElement = document.querySelector(
+        `[data-option-index="${selectedOption}"]`
+    ) as HTMLAnchorElement | null;
+    
+    if (selectedOptionElement) {
+        selectedOptionElement.click();
     }
-  };
-
-  const handleOptionSelect = (option: number) => {
-    setSelectedOption(option);
+    }
   };
 
   useEffect(() => {
@@ -66,6 +68,7 @@ export default function HomePage() {
           <Link
             key={option.href}
             href={option.href}
+            data-option-index={index}
             className={`cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl ${
               selectedOption === index
                 ? "outline outline-[3px] outline-purple"
