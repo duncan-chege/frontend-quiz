@@ -93,6 +93,12 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
     };
   }, [selectedOption, isSubmitted, currentIndex]);
 
+  useEffect(() => {
+    if (document.activeElement instanceof HTMLElement) {  // Ensures it's a valid focusable element before calling .blur()
+      document.activeElement.blur(); // Removes focus from any element
+    }
+  }, [currentIndex]); // Runs when a new question loads
+
   const submitAnswer = () => {
     if (selectedOption === null) {
       setErrorMessage("Please select an answer");
