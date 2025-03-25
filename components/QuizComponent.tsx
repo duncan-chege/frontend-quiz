@@ -57,13 +57,13 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
       const nextValue =
         selectedOption === null
           ? 0
-          : Math.min(selectedOption + 1, currentQuestion.options.length - 1);
+          : Math.min(selectedOption + 1, currentQuestion.options.length - 1); // Arrow moves down but stops at the last option
       setSelectedOption(nextValue);
     } else if (event.key === "ArrowUp") {
       const nextValue =
         selectedOption === null
           ? 0 // Start from 0 instead of doing nothing
-          : Math.max(selectedOption - 1, 0);
+          : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
       setSelectedOption(nextValue);
     } else if (event.key === "Enter" && selectedOption !== null) {
       handleOptionSelect(selectedOption);
