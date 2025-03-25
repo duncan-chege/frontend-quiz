@@ -6,7 +6,7 @@ import cssIcon from "@/public/icon-css.svg";
 import jsIcon from "@/public/icon-js.svg";
 import accessibilityIcon from "@/public/icon-accessibility.svg";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function HomePage() {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -22,36 +22,39 @@ export default function HomePage() {
     },
   ];
 
-  const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.key === "ArrowDown") {
-      const nextValue =
-        selectedOption === null
-          ? 0
-          : Math.min(selectedOption + 1, options.length - 1); // Arrow moves down but stops at the last option
-      setSelectedOption(nextValue);
-    } else if (event.key === "ArrowUp") {
-      const nextValue =
-        selectedOption === null
-          ? 0 // Start from 0 instead of doing nothing
-          : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
-      setSelectedOption(nextValue);
-    } else if (event.key === "Enter" && selectedOption !== null) {
-      const selectedOptionElement = document.querySelector(
-        `[data-option-index="${selectedOption}"]` // Find the selected Link element using the data attribute
-    ) as HTMLAnchorElement | null;
-    
-    if (selectedOptionElement) {
-        selectedOptionElement.click();  // Trigger a click event on the actual Link component
-    }
-    }
-  };
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "ArrowDown") {
+        const nextValue =
+          selectedOption === null
+            ? 0
+            : Math.min(selectedOption + 1, options.length - 1); // Arrow moves down but stops at the last option
+        setSelectedOption(nextValue);
+      } else if (event.key === "ArrowUp") {
+        const nextValue =
+          selectedOption === null
+            ? 0 // Start from 0 instead of doing nothing
+            : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
+        setSelectedOption(nextValue);
+      } else if (event.key === "Enter" && selectedOption !== null) {
+        const selectedOptionElement = document.querySelector(
+          `[data-option-index="${selectedOption}"]` // Find the selected Link element using the data attribute
+        ) as HTMLAnchorElement | null;
+
+        if (selectedOptionElement) {
+          selectedOptionElement.click(); // Trigger a click event on the actual Link component
+        }
+      }
+    },
+    [selectedOption, options.length]  // Only re-create when `selectedOption` or `options.length` changes
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [selectedOption]);
+  }, [handleKeyPress]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32" role="main">
