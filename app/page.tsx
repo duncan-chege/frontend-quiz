@@ -1,11 +1,56 @@
+"use client";
+
 import Image from "next/image";
 import htmlIcon from "@/public/icon-html.svg";
 import cssIcon from "@/public/icon-css.svg";
 import jsIcon from "@/public/icon-js.svg";
 import accessibilityIcon from "@/public/icon-accessibility.svg";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function HomePage() {
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const options = [
+    { href: "/html", icon: htmlIcon, label: "HTML", alt: "html icon" },
+    { href: "/css", icon: cssIcon, label: "CSS", alt: "css icon" },
+    { href: "/javascript", icon: jsIcon, label: "Javascript", alt: "js icon" },
+    {
+      href: "/accessibility",
+      icon: accessibilityIcon,
+      label: "Accessibility",
+      alt: "accessibility icon",
+    },
+  ];
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "ArrowDown") {
+      const nextValue =
+        selectedOption === null
+          ? 0
+          : Math.min(selectedOption + 1, options.length - 1); // Arrow moves down but stops at the last option
+      setSelectedOption(nextValue);
+    } else if (event.key === "ArrowUp") {
+      const nextValue =
+        selectedOption === null
+          ? 0 // Start from 0 instead of doing nothing
+          : Math.max(selectedOption - 1, 0); // Arrow moves up but stops at the first option
+      setSelectedOption(nextValue);
+    } else if (event.key === "Enter" && selectedOption !== null) {
+      handleOptionSelect(selectedOption);
+    }
+  };
+
+  const handleOptionSelect = (option: number) => {
+    setSelectedOption(option);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [selectedOption]);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32" role="main">
       <div>
@@ -16,54 +61,36 @@ export default function HomePage() {
           Pick a subject to get started
         </p>
       </div>
-      <div className="flex flex-col gap-y-6">
-        <Link href="/html">
-          <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
+      <div className="space-y-4">
+        {options.map((option, index) => (
+          <Link
+            key={option.href}
+            href={option.href}
+            className={`cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl ${
+              selectedOption === index
+                ? "outline outline-[3px] outline-purple"
+                : ""
+            }`}>
             <Image
-              src={htmlIcon}
-              alt="html icon"
-              className="p-2 bg-orange-100 rounded-md"
-            />
-            <h2 className="text-2xl font-semibold text-dark-navy">HTML</h2>
-          </div>
-        </Link>
-
-        <Link href="/css">
-          <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
-            <Image
-              src={cssIcon}
-              alt="css icon"
-              className="p-2 bg-emerald-100 rounded-md"
-            />
-            <h2 className="text-2xl font-semibold text-dark-navy">CSS</h2>
-          </div>
-        </Link>
-
-        <Link href="/javascript">
-          <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
-            <Image
-              src={jsIcon}
-              alt="js icon"
-              className="p-2 bg-blue-100 rounded-md"
+              src={option.icon}
+              alt={option.alt}
+              className={`p-2 rounded-md ${
+                option.label === "HTML"
+                  ? "bg-orange-100"
+                  : option.label === "CSS"
+                  ? "bg-emerald-100"
+                  : option.label === "Javascript"
+                  ? "bg-blue-100"
+                  : option.label === "Accessibility"
+                  ? "bg-fuchsia-100"
+                  : ""
+              }`}
             />
             <h2 className="text-2xl font-semibold text-dark-navy">
-              Javascript
+              {option.label}
             </h2>
-          </div>
-        </Link>
-
-        <Link href="/accessibility">
-          <div className="cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl">
-            <Image
-              src={accessibilityIcon}
-              alt="accessibility icon"
-              className="p-2 bg-violet-200 rounded-md"
-            />
-            <h2 className="text-2xl font-semibold text-dark-navy">
-              Accessibility
-            </h2>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
     </div>
   );
