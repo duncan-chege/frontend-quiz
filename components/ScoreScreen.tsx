@@ -34,7 +34,7 @@ export default function ScoreScreen() {
 
     setTimeout(() => {
       resetQuiz();  // Reset state after navigation
-    }, 100);  // This short 100ms delay prevents unwanted UI flickers
+    }, 500);  // This short 500ms delay prevents unwanted UI flickers
   }
 
   return (
