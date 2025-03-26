@@ -167,10 +167,10 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
       className="grid grid-cols-1 lg:grid-cols-2 gap-x-32 gap-y-8"
       role="main">
       <div>
-        <p className="italic text-grey-navy">
+        <p className="dark:text-light-bluish italic text-grey-navy">
           Question {currentIndex + 1} out of {questions.length}
         </p>
-        <h3 className="mt-8 font-bold text-2xl md:text-3xl text-dark-navy">
+        <h3 className="dark:text-white mt-8 font-bold text-2xl md:text-3xl text-dark-navy">
           {currentQuestion.question}
         </h3>
 
@@ -183,7 +183,7 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
         {currentQuestion.options.map((option, index) => (
           <li
             key={index}
-            className={`group cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl
+            className={`dark:bg-navy dark:shadow-none group cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl
               ${
                 selectedOption === index
                   ? `outline outline-[3px] ${
@@ -210,7 +210,7 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
               }`}>
               {optionLabels[index]}
             </span>
-            <h2 className="text-2xl font-semibold text-dark-navy">{option}</h2>
+            <h2 className="dark:text-white text-2xl font-semibold text-dark-navy">{option}</h2>
             {selectedOption === index && isCorrect === true && (
               <Image src={correctIcon} alt="correct icon"></Image>
             )}

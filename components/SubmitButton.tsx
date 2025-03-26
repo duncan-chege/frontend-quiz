@@ -25,7 +25,7 @@ export default function SubmitButton({
       </button>
 
       {errorMessage && (
-        <p className="text-red mt-4 flex justify-center items-center gap-2">
+        <p className="dark:text-white text-red mt-4 flex justify-center items-center gap-2">
             <Image src={errorIcon} alt="the error icon"></Image>
           {errorMessage}
         </p>

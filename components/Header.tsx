@@ -49,7 +49,7 @@ export default function Header() {
             alt={`${title} icon`}
           />
         )}
-        <h1 className="text-xl md:text-2xl font-semibold text-dark-navy">
+        <h1 className="dark:text-white text-xl md:text-2xl font-semibold text-dark-navy">
           {title}
         </h1>
       </div>
