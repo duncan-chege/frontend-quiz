@@ -10,23 +10,11 @@ import { useEffect, useState } from "react";
 export default function ThemeToggle() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     // Sets the initial state based on localStorage. This function only runs once when component mounts
-    if (typeof window !== "undefined" && localStorage.getItem("theme") === "dark") {
-      return true;
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") === "dark";
     }
     return false; //If localStorage is unavailable, defaults to light mode
   });
-
-  // Runs when the component mounts
-  useEffect(() => {
-    // Runs only when window is available on the client side(browser)
-    if (typeof window !== "undefined") {
-      document.documentElement.classList.remove("dark"); // Ensure light mode first
-      if (localStorage.getItem("theme") === "dark") {
-        setDarkMode(true);
-        document.documentElement.classList.add("dark");
-      }
-    }
-  }, []);
 
   useEffect(() => {
     // Runs when the dark mode changes
