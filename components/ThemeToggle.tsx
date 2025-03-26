@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import moonIcon from "@/public/icon-moon-dark.svg";
 import sunDarkIcon from "@/public/icon-sun-dark.svg";
 import sunLightIcon from "@/public/icon-sun-light.svg";
 import moonDarkIcon from "@/public/icon-moon-dark.svg";
