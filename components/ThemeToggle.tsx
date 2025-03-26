@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import moonIcon from "@/public/icon-moon-dark.svg";
-import sunIcon from "@/public/icon-sun-dark.svg";
+import sunDarkIcon from "@/public/icon-sun-dark.svg";
+import sunLightIcon from "@/public/icon-sun-light.svg";
+import moonDarkIcon from "@/public/icon-moon-dark.svg";
+import moonLightIcon from "@/public/icon-moon-light.svg";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
@@ -13,6 +16,8 @@ export default function ThemeToggle() {
     const theme = localStorage.getItem("theme");
     if (theme === "dark") {
       setDarkMode(true);
+    } else if (theme === "light") {
+      setDarkMode(false);
     }
   }, []);
 
@@ -29,15 +34,27 @@ export default function ThemeToggle() {
 
   return (
     <>
-      <Image src={sunIcon} alt="the sun icon" />
+      {darkMode ? (
+        <Image src={sunLightIcon} alt="the light sun icon" />
+      ) : (
+        <Image src={sunDarkIcon} alt="the dark sun icon" />
+      )}
       <label
         htmlFor="check"
         className="flex bg-purple cursor-pointer relative w-12 h-6 rounded-full"
         onClick={() => setDarkMode(!darkMode)}>
         <input type="checkbox" id="check" className="sr-only peer" />
-        <span className="w-2/5 h-4/5 bg-white absolute rounded-full left-1 top-[2px] peer-checked:bg-white peer-checked:left-6 transition-all duration-500"></span>
+        <span
+          className={`${
+            darkMode ? "peer-checked:left-6" : ""
+          } w-2/5 h-4/5 bg-white absolute rounded-full left-1 top-[2px]
+         peer-checked:bg-white transition-all duration-500`}></span>
       </label>
-      <Image src={moonIcon} alt="the moon icon" />
+      {darkMode ? (
+        <Image src={moonLightIcon} alt="the light moon icon" />
+      ) : (
+        <Image src={moonDarkIcon} alt="the dark moon icon" />
+      )}
     </>
   );
 }
