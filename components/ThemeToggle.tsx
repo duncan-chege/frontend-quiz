@@ -9,7 +9,10 @@ import moonLightIcon from "@/public/icon-moon-light.svg";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    // Sets the initial state based on localStorage. This function only runs once when component mounts
+    return localStorage.getItem("theme") === "dark";    
+  });
 
   useEffect(() => {
     // Runs when the component mounts
