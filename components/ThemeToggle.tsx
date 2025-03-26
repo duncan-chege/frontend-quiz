@@ -47,7 +47,8 @@ export default function ThemeToggle() {
       )}
       <label
         htmlFor="check"
-        className="flex bg-purple cursor-pointer relative w-12 h-6 rounded-full">
+        className="flex bg-purple cursor-pointer relative w-12 h-6 rounded-full"
+        aria-label="Toggle dark mode">
         <input
           type="checkbox"
           id="check"
