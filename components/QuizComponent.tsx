@@ -81,10 +81,6 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
     }
   };
 
-  const handleOptionSelect = (option: number) => {
-    setSelectedOption(option);
-  };
-
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
     return () => {
@@ -97,6 +93,10 @@ export default function QuizComponent({ quizIndex }: QuizComponentProps) {
       document.activeElement.blur(); // Removes focus from any element
     }
   }, [currentIndex, handleKeyPress]); // Runs when a new question loads
+
+  const handleOptionSelect = (option: number) => {
+    setSelectedOption(option);
+  };
 
   const submitAnswer = () => {
     if (selectedOption === null) {
