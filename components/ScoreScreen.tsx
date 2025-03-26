@@ -7,6 +7,7 @@ import accessibilityIcon from "@/public/icon-accessibility.svg";
 import javascriptIcon from "@/public/icon-js.svg";
 import cssIcon from "@/public/icon-css.svg"
 import htmlIcon from "@/public/icon-html.svg"
+import { useEffect } from "react";
 
 export default function ScoreScreen() {
   const { score, totalQuestions, resetQuiz } = useQuiz();
@@ -36,6 +37,17 @@ export default function ScoreScreen() {
       resetQuiz();  // Reset state after navigation
     }, 500);  // This short 500ms delay prevents unwanted UI flickers
   }
+
+useEffect(() => {
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "Enter"){
+      handlePlayAgain();
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyPress);
+  return () => window.removeEventListener("keydown", handleKeyPress);
+}, []);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-32" role="main">
