@@ -59,7 +59,7 @@ export default function HomePage() {
         <h1 className="dark:text-white text-5xl font-light text-dark-navy">
           Welcome to the <span className="font-bold">Frontend Quiz!</span>
         </h1>
-        <p className="mt-8 mb-4 text-grey-navy italic">
+        <p className="dark:text-light-bluish mt-8 mb-4 text-grey-navy italic">
           Pick a subject to get started
         </p>
       </div>
@@ -69,7 +69,7 @@ export default function HomePage() {
             key={option.href}
             href={option.href}
             data-option-index={index} // Add a data-option-index attribute to each Link component to identify them
-            className={`cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl ${
+            className={`dark:bg-navy dark:shadow-none cursor-pointer p-4 flex gap-x-6 items-center shadow-md shadow-gray-200 bg-white rounded-xl ${
               selectedOption === index
                 ? "outline outline-[3px] outline-purple"
                 : ""
@@ -89,7 +89,7 @@ export default function HomePage() {
                   : ""
               }`}
             />
-            <h2 className="text-2xl font-semibold text-dark-navy">
+            <h2 className="dark:text-white text-2xl font-semibold text-dark-navy">
               {option.label}
             </h2>
           </Link>
