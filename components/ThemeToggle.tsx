@@ -16,6 +16,15 @@ export default function ThemeToggle() {
     return false; //If localStorage is unavailable, defaults to light mode
   });
 
+  // Prevent flickering by setting class immediately
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []); // Runs only once on mount
+
   useEffect(() => {
     // Runs when the dark mode changes
     if (typeof window !== "undefined") {
