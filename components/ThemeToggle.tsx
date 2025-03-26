@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export default function ThemeToggle() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     // Sets the initial state based on localStorage. This function only runs once when component mounts
-    return localStorage.getItem("theme") === "dark";    
+    return localStorage.getItem("theme") === "dark";
   });
 
   useEffect(() => {
@@ -44,14 +44,19 @@ export default function ThemeToggle() {
       )}
       <label
         htmlFor="check"
-        className="flex bg-purple cursor-pointer relative w-12 h-6 rounded-full"
-        onClick={() => setDarkMode(!darkMode)}>
-        <input type="checkbox" id="check" className="sr-only peer" />
+        className="flex bg-purple cursor-pointer relative w-12 h-6 rounded-full">
+        <input
+          type="checkbox"
+          id="check"
+          className="sr-only peer"
+          checked={darkMode}
+          onChange={() => setDarkMode(!darkMode)}
+        />
         <span
-          className={`${
-            darkMode ? "peer-checked:left-6" : ""
-          } w-2/5 h-4/5 bg-white absolute rounded-full left-1 top-[2px]
-         peer-checked:bg-white transition-all duration-500`}></span>
+          className={`w-2/5 h-4/5 bg-white absolute rounded-full left-1 top-[2px] transition-all duration-500 
+            peer-checked:left-6 peer-checked:bg-white ${
+              darkMode ? "left-6" : ""
+            }`}></span>
       </label>
       {darkMode ? (
         <Image src={moonLightIcon} alt="the light moon icon" />
