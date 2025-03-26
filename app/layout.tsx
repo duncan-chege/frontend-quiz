@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="pt-10 pb-4 px-8 md:px-20 xl:px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-mobile-light.svg')] 
+        className="xl:pt-20 pt-12 pb-4 px-8 md:px-20 xl:px-36 bg-cover bg-center min-h-screen bg-[url('/pattern-background-mobile-light.svg')] 
       md:bg-[url('/pattern-background-tablet-light.svg')] xl:bg-[url('/pattern-background-desktop-light.svg')]
       dark:bg-[url('/pattern-background-mobile-dark.svg')] dark:md:bg-[url('/pattern-background-tablet-dark.svg')]
       dark:xl:bg-[url('/pattern-background-desktop-dark.svg') dark:bg-dark-navy">

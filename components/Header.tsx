@@ -30,7 +30,7 @@ export default function Header() {
     : { title: "", icon: "" };
 
   return (
-    <header className="flex justify-between pb-12">
+    <header className="flex justify-between pb-12 xl:pb-20">
       <div className="flex items-center gap-x-4">
         {icon && (
           <Image
